@@ -1,0 +1,30 @@
+{
+  "name": "authors-api-demo",
+  "version": "1.0.0",
+  "description": "Demo REST API with serverless + dynamoDB",
+  "keywords": [
+    "nodejs",
+    "aws",
+    "dynamodb",
+    "serverless"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src/ test/",
+    "start": "./start-server.sh",
+    "stop": "./stop-server.sh",
+    "deploy": "serverless deploy",
+    "postinstall": "serverless dynamodb install 2>&1 | awk 'NF'"
+  },
+  "devDependencies": {
+    "aws-sdk": "2.280.1",
+    "eslint": "^5.2.0",
+    "node-jre": "^0.2.3",
+    "serverless": "^1.26.1",
+    "serverless-dynamodb-local": "0.2.35",
+    "serverless-offline": "^3.25.6"
+  },
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
+}
