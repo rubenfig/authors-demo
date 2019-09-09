@@ -23,15 +23,16 @@ module.exports = {
 
     // Add new entry to authorsTable
     try {
-      const author = (await Util.DocumentClient.put({
+      const author = {
+        id: uuid.v1(),
+        fullname: newAuthor.fullname,
+        email: newAuthor.email,
+        birthdate: newAuthor.birthdate
+      };
+      await Util.DocumentClient.put({
         TableName: authorsTable,
-        Item: {
-          id: uuid.v1(),
-          fullname: newAuthor.fullname,
-          email: newAuthor.email,
-          birthdate: newAuthor.birthdate
-        },
-      }).promise()).Item;
+        Item: author,
+      }).promise();
 
       return Util.formatResponse({
         author
@@ -63,13 +64,17 @@ module.exports = {
 
     try {
       // delete the author from the database
-      await Util.DocumentClient.delete({
+      const deleteResult = (await Util.DocumentClient.delete({
         TableName: authorsTable,
         Key: {
           id
         },
-      }).promise();
-      return Util.formatResponse({});
+        ReturnValues: 'ALL_OLD'
+      }).promise()).Attributes;
+      if (deleteResult)
+        return Util.formatResponse({});
+      else
+        return Util.formatResponse('Author not found', 404);
     } catch (error) {
       console.log(error);
       return Util.formatResponse('Could not delete Author', 500);

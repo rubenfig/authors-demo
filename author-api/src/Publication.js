@@ -26,17 +26,18 @@ module.exports = {
 
     // Add new entry to publicationsTable
     try {
-      const publication = (await Util.DocumentClient.put({
+      const publication = {
+        id: uuid.v1(),
+        title: newPublication.title,
+        date: newPublication.date,
+        author: newPublication.author,
+        body: newPublication.body,
+        dummy: 1
+      };
+      await Util.DocumentClient.put({
         TableName: publicationsTable,
-        Item: {
-          id: uuid.v1(),
-          title: newPublication.title,
-          date: newPublication.date,
-          author: newPublication.author,
-          body: newPublication.body,
-          dummy: 1
-        },
-      }).promise()).Item;
+        Item: publication
+      }).promise();
 
       return Util.formatResponse({
         publication
@@ -71,13 +72,17 @@ module.exports = {
 
     try {
       // delete the publication from the database
-      await Util.DocumentClient.delete({
+      const deleteResult = (await Util.DocumentClient.delete({
         TableName: publicationsTable,
         Key: {
           id
         },
-      }).promise();
-      return Util.formatResponse({});
+        ReturnValues: 'ALL_OLD'
+      }).promise()).Attributes;
+      if (deleteResult)
+        return Util.formatResponse({});
+      else
+        return Util.formatResponse('Publication not found', 404);
     } catch (error) {
       console.log(error);
       return Util.formatResponse('Could not delete Publication', 500);

@@ -12,6 +12,7 @@
   "scripts": {
     "lint": "eslint src/ test/",
     "start": "./start-server.sh",
+    "test": "mocha --recursive ./tests/ --exit",
     "stop": "./stop-server.sh",
     "deploy": "serverless deploy --stage prod",
     "deploy-dev": "serverless deploy --stage dev",
@@ -19,11 +20,14 @@
   },
   "devDependencies": {
     "aws-sdk": "2.280.1",
+    "chai": "^4.2.0",
     "eslint": "^5.2.0",
+    "mocha": "^6.2.0",
     "node-jre": "^0.2.3",
     "serverless": "^1.26.1",
     "serverless-dynamodb-local": "0.2.35",
-    "serverless-offline": "^3.25.6"
+    "serverless-offline": "^3.25.6",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "uuid": "^3.2.1"

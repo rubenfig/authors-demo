@@ -21,6 +21,20 @@ plugins:
   - serverless-dynamodb-local
   - serverless-offline
 
+
+custom:
+  dynamodb:
+    start:
+      seed: true
+
+    seed:
+      test:
+        sources:
+          - table: ${self:provider.environment.DYNAMODB_NAMESPACE}-authors
+            sources: [./seed/authors_seed.json]
+          - table: ${self:provider.environment.DYNAMODB_NAMESPACE}-publications
+            sources: [./seed/publications_seed.json]
+
 functions:
 
   ## Authors API

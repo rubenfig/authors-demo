@@ -14,7 +14,7 @@ java -version
 # Start local dynamodb and offline plugins
 export AWS_ACCESS_KEY_ID=test
 export AWS_SECRET_ACCESS_KEY=testkey
-serverless dynamodb start --migrate &
+serverless dynamodb start --migrate --seed=test &
 sleep 5
 serverless offline &
 sleep 5
