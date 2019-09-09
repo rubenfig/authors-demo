@@ -10,7 +10,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "lint": "eslint src/ test/",
     "start": "./start-server.sh",
     "test": "mocha --recursive ./tests/ --exit",
     "stop": "./stop-server.sh",

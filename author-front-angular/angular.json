@@ -64,22 +64,15 @@
                   "with": "src/environments/environment.dev.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "buildOptimizer": true
             }
           }
         },
@@ -94,6 +87,9 @@
             },
             "dev": {
               "browserTarget": "author-front-angular:build:dev"
+            },
+            "local": {
+              "browserTarget": "author-front-angular:build:local"
             }
           }
         },
@@ -146,6 +142,9 @@
             },
             "dev": {
               "devServerTarget": "author-front-angular:serve:dev"
+            },
+            "local": {
+              "devServerTarget": "author-front-angular:serve:local"
             }
           }
         }
