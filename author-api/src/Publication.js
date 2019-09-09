@@ -134,7 +134,7 @@ module.exports = {
     console.log(params);
     const queryParams = {
       TableName: publicationsTable,
-      ScanIndexForward: params.order === 'DESC',
+      ScanIndexForward: params.order !== 'DESC',
       Limit: parseInt(params.limit) || 10
     };
     //We use the author index when selecting an author
@@ -153,7 +153,7 @@ module.exports = {
       };
     }
     if (params.title) {
-      queryParams.FilterExpression = 'title LIKE :title';
+      queryParams.FilterExpression = 'contains(title, :title)';
       queryParams.ExpressionAttributeValues[':title'] = params.title;
     }
     if (params.lastEvaluated) {
@@ -164,11 +164,12 @@ module.exports = {
       const queryResult = await Util.DocumentClient.query(queryParams)
         .promise();
         // create a response of the results
-      const items = params.author ? queryResult.Items : await Promise.all(
+      const publications = params.author ? queryResult.Items :
+        await Promise.all(
         queryResult.Items.map(transformRetrievedPublication)
       );
       return Util.formatResponse({
-        items,
+        publications,
         next: queryResult.LastEvaluatedKey
       });
     } catch (error) {
@@ -184,6 +185,7 @@ module.exports = {
  * decorate it with extra information like author, favorite, following etc.
  */
 async function transformRetrievedPublication(publication) {
-  publication.author = await Author.getAuthorById(publication.author) || {};
+  publication.author = (await Author.getAuthorById(publication.author)).Item
+    || {};
   return publication;
 }

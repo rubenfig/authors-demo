@@ -34,10 +34,10 @@ module.exports = {
 
 function formatResponse(res, statusCode = 200) {
   let body;
-  if (statusCode == 200) {
+  if (statusCode === 200) {
     body = JSON.stringify(res, null, 2);
   } else {
-    body = JSON.stringify({ error: res }, null, 2);
+    body = JSON.stringify({ message: res }, null, 2);
   }
   return {
     statusCode,

@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="mat-h1">{{publication.title}}</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <span> {{publication.body}}</span>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-footer >
+    <p>Written by {{author.fullname}}</p>
+    <p>Email: {{author.email}}</p>
+    <p>{{publication.date | date:'MM/dd/yyyy HH:mm'}}</p>
+  </mat-card-footer>
+</mat-card>

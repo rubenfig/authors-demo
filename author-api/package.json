@@ -13,7 +13,8 @@
     "lint": "eslint src/ test/",
     "start": "./start-server.sh",
     "stop": "./stop-server.sh",
-    "deploy": "serverless deploy",
+    "deploy": "serverless deploy --stage prod",
+    "deploy-dev": "serverless deploy --stage dev",
     "postinstall": "serverless dynamodb install 2>&1 | awk 'NF'"
   },
   "devDependencies": {

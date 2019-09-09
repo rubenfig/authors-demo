@@ -9,3 +9,5 @@ dist
 .dynamodb
 coverage
 gh-pages
+.DS_Store
+.idea/
