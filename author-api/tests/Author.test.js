@@ -13,7 +13,6 @@ describe('Authors tests', () => {
       .end((error, result) => {
         if (error) return done(error);
         const authors = result.body.authors;
-        console.log(authors);
         expect(authors[0]).to.deep.eq({
           "id": "138a71b0-d269-11e9-b500-1d02fa422f1d",
           "birthdate": 1528461936,

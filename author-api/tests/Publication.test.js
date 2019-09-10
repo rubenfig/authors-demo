@@ -13,7 +13,6 @@ describe('Publications tests', () => {
       .end((error, result) => {
         if (error) return done(error);
         const publications = result.body.publications;
-        console.log(publications);
         expect(publications[0]).to.deep.eq({
           date: 1529393136,
           dummy: 1,

@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import { map } from 'rxjs/operators';
-import {Breakpoints, BreakpointObserver, MediaMatcher} from '@angular/cdk/layout';
+import {MediaMatcher} from '@angular/cdk/layout';
 import {AuthorsService} from "../../services/author.service";
 import {Author} from "../../models/author";
 import {PublicationsService} from "../../services/publication.service";
@@ -17,11 +16,10 @@ export class HomeComponent {
   firstPage = false;
   lastPage = false;
   selectedAuthor: Author;
-  order = 'ASC';
+  order = 'DESC';
   mobileQuery: MediaQueryList;
   searchText: string = '';
   paginationStack = [];
-  loading = false;
 
   private readonly _mobileQueryListener: () => void;
 
@@ -32,9 +30,8 @@ export class HomeComponent {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    this.loading = true;
     Promise.all([this.listAuthors(),this.listPublications()]).then(() => {
-      this.loading = false;
+      console.log('All loaded');
     });
   };
 
@@ -44,7 +41,6 @@ export class HomeComponent {
 
   async listAuthors() {
     this.authorsService.list().subscribe((response: any) => {
-      console.log(response);
       this.authors = response.authors;
     }, err => {
       alert(err);
@@ -60,9 +56,7 @@ export class HomeComponent {
       title: this.searchText.length ? this.searchText : null,
       lastEvaluated: lastEvaluated && JSON.stringify(lastEvaluated)
     };
-    console.log(params);
     this.publicationsService.list(params).subscribe((response: any) => {
-      console.log(response);
       this.publications = response.publications;
       response.next && this.publications.length == 10 ?
         this.paginationStack.push(response.next) :
@@ -92,7 +86,7 @@ export class HomeComponent {
     this.paginationStack = [];
     this.lastPage = false;
     this.searchText = '';
-    this.order = 'ASC';
+    this.order = 'DESC';
     await this.listPublications();
   };
 

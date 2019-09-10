@@ -13,11 +13,6 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <mat-progress-spinner
-        color="primary"
-        mode="indeterminate"
-        *ngIf="loading">
-      </mat-progress-spinner>
       <h1 class="mat-h1">author's publications</h1>
       <form class="search-form">
         <mat-form-field>
@@ -42,7 +37,7 @@
           </select>
         </mat-form-field>
       </form>
-      <div role="list" class="publication-list" *ngFor="let publication of publications">
+      <div  role="list" class="publication-list" *ngFor="let publication of publications">
         <app-publication [publication]="publication"
                          [author]="selectedAuthor ? selectedAuthor : publication.author">
         </app-publication>
