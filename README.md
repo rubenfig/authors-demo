@@ -5,7 +5,7 @@ Demo project of a blog app.
 
 ## Subprojects
 
-###author-api: 
+### author-api: 
 
 REST API made with NodeJS, Serverless and DynamoDB.
 
@@ -13,7 +13,7 @@ You can try it on:
 
 https://qe0w0478h6.execute-api.sa-east-1.amazonaws.com/dev/api/
 
-###author-front-angular: 
+### author-front-angular: 
 
 Front End project made in Angular 8.
 
