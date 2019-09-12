@@ -30,14 +30,12 @@ export class ApiService {
         }
       }
     }
-    console.log(this.url + '/' + endpoint);
     return this.http.get(this.url + '/' + endpoint, reqOpts).pipe(
       catchError(this.handleError)
     );
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {
-    console.log(endpoint);
     return this.http.post(this.url + '/' + endpoint, body, reqOpts).pipe(
       catchError(this.handleError)
     );

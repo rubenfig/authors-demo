@@ -92,7 +92,6 @@ module.exports = {
   /** Update publication */
   async update(event) {
     const data = JSON.parse(event.body);
-    console.log(data);
     if (!data.title) {
       return Util.formatResponse('Title must be specified.', 422);
     }
@@ -136,7 +135,6 @@ module.exports = {
   /** List publications */
   async list(event) {
     const params = event.queryStringParameters || {};
-    console.log(params);
     const queryParams = {
       TableName: publicationsTable,
       ScanIndexForward: params.order !== 'DESC',
@@ -165,7 +163,6 @@ module.exports = {
       queryParams.ExclusiveStartKey = JSON.parse(params.lastEvaluated);
     }
     try {
-      console.log(queryParams);
       const queryResult = await Util.DocumentClient.query(queryParams)
         .promise();
         // create a response of the results

@@ -134,7 +134,6 @@ module.exports = {
         id: data.start
       };
     }
-    console.log(params);
     try {
       // create a response of the results
       const result = await Util.DocumentClient.scan(params).promise();
