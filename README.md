@@ -21,6 +21,14 @@ You can try it on:
 
 https://rubenfig-authors-demo.netlify.com/
 
+### author-front-react: 
+
+Front End project made in React.
+
+You can try it on: 
+
+https://rubenfig-authors-react.netlify.com/
+
 **Note:** Each project contains its own README file with documentation. 
 
 
